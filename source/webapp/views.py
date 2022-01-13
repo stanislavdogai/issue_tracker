@@ -34,7 +34,7 @@ class CreateTask(View):
                                            description=description,
                                            status=status,
                                            type=type)
-            return redirect('home_page')
+            return redirect('view_page', new_task.pk)
         return render(request, 'create_task.html', {'form' : form})
 
 class UpdateTask(TemplateView):
@@ -57,7 +57,7 @@ class UpdateTask(TemplateView):
             task.status = form.cleaned_data.get('status')
             task.type = form.cleaned_data.get('type')
             task.save()
-            return redirect('home_page')
+            return redirect('view_page', task.pk)
         return render(request, 'create_task.html', {'form' : form})
 
 
