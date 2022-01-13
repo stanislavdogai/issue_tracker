@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from webapp.models import Task
 from django.views import View
 from django.views.generic import TemplateView, RedirectView
-from webapp.forms import TaskForm
+from webapp.forms import TaskForm, TaskFormDelete
 
 
 
@@ -52,15 +52,30 @@ class UpdateTask(TemplateView):
         task = get_object_or_404(Task, pk=kwargs.get('pk'))
         form = TaskForm(data=request.POST)
         if form.is_valid():
-            task.summary = request.POST.get('summary')
-            task.description = request.POST.get('description')
-            task.status = request.POST.get('status')
-            task.type = request.POST.get('type')
+            task.summary = form.cleaned_data.get('summary')
+            task.description = form.cleaned_data.get('description')
+            task.status = form.cleaned_data.get('status')
+            task.type = form.cleaned_data.get('type')
             task.save()
             return redirect('home_page')
         return render(request, 'create_task.html', {'form' : form})
 
 
 
-class DeleteTask(View):
-    pass
+class DeleteTask(TemplateView):
+    CONFIRM = 'ДА'
+    def get(self, request, *args, **kwargs):
+        task = get_object_or_404(Task, pk=kwargs.get('pk'))
+        form = TaskFormDelete()
+        return render(request, 'delete.html', {'task': task, 'form': form})
+
+    def post(self, request, *args, **kwargs):
+        form = TaskFormDelete(data=request.POST)
+        task = get_object_or_404(Task, pk=kwargs.get('pk'))
+        if form.is_valid():
+            if form.cleaned_data.get('confirm') != self.CONFIRM:
+                form.errors['confirm'] = ['Вы ввели другое слово']
+                return render(request, 'delete.html', {'form': form, 'task': task})
+            task.delete()
+            return redirect('home_page')
+        return render(request, 'delete.html', {'form': form, 'task': task})

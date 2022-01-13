@@ -8,4 +8,5 @@ class TaskForm(forms.Form):
     type = forms.ModelChoiceField(queryset=Type.objects.all())
     status = forms.ModelChoiceField(queryset=Status.objects.all())
 
-
+class TaskFormDelete(forms.Form):
+    confirm = forms.CharField(max_length=3, required=True, label='Подтверждение удаления')

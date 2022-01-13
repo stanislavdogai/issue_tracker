@@ -15,7 +15,7 @@ class Type(models.Model):
                               verbose_name='Тип задачи')
 
     def __str__(self):
-        return f"{self.pk}. {self.tittle}"
+        return f"{self.tittle}"
 
 class Status(models.Model):
     tittle = models.CharField(max_length=100,
@@ -24,7 +24,7 @@ class Status(models.Model):
                               verbose_name='Статус задачи')
 
     def __str__(self):
-        return f"{self.pk}. {self.tittle}"
+        return f"{self.tittle}"
 
 class Task(BaseModel):
     summary = models.CharField(max_length=200, null=False, blank=False, verbose_name="Заголовок")
