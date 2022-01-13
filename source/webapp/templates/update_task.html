@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block tittle %}Редактирование задачу{% endblock %}
+
+{% block content %}
+<h1>Отредактируйте задачу</h1>
+    <form method="POST">
+    {% include 'partial/form.html' with button_text='Обновить' %}
+    </form>
+{% endblock %}
