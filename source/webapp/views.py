@@ -6,10 +6,12 @@ from webapp.forms import TaskForm, TaskFormDelete
 
 
 
-class HomePage(View):
-    def get(self, request, *args, **kwargs):
+class HomePage(TemplateView):
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
         tasks = Task.objects.order_by("summary")
-        return render(request, 'index.html', {'tasks': tasks})
+        context['tasks'] = tasks
+        return context
 
 class TaskView(TemplateView):
     def get_context_data(self, **kwargs):
@@ -29,11 +31,11 @@ class CreateTask(View):
             summary = form.cleaned_data.get('summary')
             description = form.cleaned_data.get('description')
             status = form.cleaned_data.get('status')
-            type = form.cleaned_data.get('type')
+            types = form.cleaned_data.pop('types')
             new_task = Task.objects.create(summary=summary,
                                            description=description,
-                                           status=status,
-                                           type=type)
+                                           status=status)
+            new_task.types.set(types)
             return redirect('view_page', new_task.pk)
         return render(request, 'create_task.html', {'form' : form})
 
@@ -44,7 +46,7 @@ class UpdateTask(TemplateView):
             'summary' : task.summary,
             'status': task.status,
             'description': task.description,
-            'type': task.type
+            'types': task.types.all()
         })
         return render(request, 'update_task.html', {'form' : form, 'task' : task})
 
@@ -55,7 +57,8 @@ class UpdateTask(TemplateView):
             task.summary = form.cleaned_data.get('summary')
             task.description = form.cleaned_data.get('description')
             task.status = form.cleaned_data.get('status')
-            task.type = form.cleaned_data.get('type')
+            types = form.cleaned_data.get('types')
+            task.types.set(types)
             task.save()
             return redirect('view_page', task.pk)
         return render(request, 'create_task.html', {'form' : form})

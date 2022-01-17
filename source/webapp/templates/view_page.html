@@ -10,7 +10,11 @@
     <blockquote class="blockquote mb-0">
       <p>Подробное описание задачи: {{ task.description }}</p>
     <p>Статус задачи {{ task.status }}</p>
-        <p>Тип задачи {{ task.type }}</p>
+        <p>Тип задачи
+            {% for type in task.types.all %}
+                {{ type }}{% if not forloop.last %}, {% else %}. {% endif %}
+            {% endfor %}
+        </p>
       <footer class="">Время создания: {{ task.created_at }}<br>Время обновления {{ task.updated_at }}</footer>
     </blockquote>
   <a href="{% url 'delete_page' task.pk  %} " class="btn btn-secondary mt-3">Удалить задачу</a>

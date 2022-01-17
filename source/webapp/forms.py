@@ -4,8 +4,8 @@ from webapp.models import Type, Status
 
 class TaskForm(forms.Form):
     summary = forms.CharField(max_length=200, required=True, label="Заголовок")
-    description = forms.CharField(max_length=2002, required=True, label="Описание", widget=widgets.Textarea(attrs={"rows": 5, "cols":50}))
-    type = forms.ModelChoiceField(queryset=Type.objects.all())
+    description = forms.CharField(max_length=2002, required=False, label="Описание", widget=widgets.Textarea(attrs={"rows": 5, "cols":50}))
+    types = forms.ModelMultipleChoiceField(queryset=Type.objects.all(), widget=forms.CheckboxSelectMultiple)
     status = forms.ModelChoiceField(queryset=Status.objects.all())
 
 class TaskFormDelete(forms.Form):
