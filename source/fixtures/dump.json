@@ -419,7 +419,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$320000$kHy5erJO7qEgJaEKSL6pyc$qx6BitnVaiVwA6ftJI3MkL45e+bZSUyNEwu+B+UhzlY=",
-    "last_login": "2022-01-17T11:27:49.305Z",
+    "last_login": "2022-01-21T21:29:12.483Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -502,6 +502,14 @@
   "fields": {
     "app_label": "webapp",
     "model": "task"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "k2ihf449dfx22a0d1es2t3tchwpdsvqw",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hAGpIBL9z0DGTqDVA0kpV0Z765NutDtf-_9l4i4rSVunZc4k7gIEKffLeH04LoDumO9NTm1ui5zkrsiD9rl2Iif18P9OyjYy7dW7K0JTrFGMhlsGPLg2AcAry0Fr9g5hQnIJGPprH1CzA4ystWgjRPvD8alN0c:1nB1T6:0ZL2bxg7QWdz4eerxUusbm1G9CZDvIhd47M9pv9xRjU",
+    "expire_date": "2022-02-04T21:29:12.486Z"
   }
 },
 {
@@ -631,14 +639,27 @@
   "pk": 8,
   "fields": {
     "created_at": "2022-01-20T11:40:47.126Z",
-    "updated_at": "2022-01-20T11:40:47.126Z",
-    "summary": "sssasdasd12",
+    "updated_at": "2022-01-24T10:29:43.773Z",
+    "summary": "asdbakdbkbug",
     "description": "123123",
-    "status": 2,
+    "status": 3,
     "types": [
       1,
-      2,
       3
+    ]
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 9,
+  "fields": {
+    "created_at": "2022-01-24T06:46:19.329Z",
+    "updated_at": "2022-01-24T06:46:19.329Z",
+    "summary": "закрытая задача",
+    "description": "super",
+    "status": 3,
+    "types": [
+      1
     ]
   }
 }

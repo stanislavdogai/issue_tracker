@@ -1,0 +1,29 @@
+1 запрос
+
+from webapp.models import Task, Status, Type
+from django.db.models import Q
+from django.utils import timezone
+
+q1 = Q(updated_at__month__gte= timezone.now().month - 1)
+q2 = Q(status__tittle='Выполнено')
+Task.objects.filter(q1 & q2)
+
+2 запрос
+from webapp.models import Task, Status, Type
+from django.db.models import Q
+
+type_q1 = Q(types__tittle = 'Задача')
+type_q2 = Q(types__tittle = 'Ошибка')
+status_q1 = Q(status__tittle = 'Новый')
+status_q2 = Q(status__tittle = 'Выполнено')
+Task.objects.filter((type_q1 | type_q2) & (status_q1 | status_q2))
+
+Или так
+Task.objects.filter(status__tittle__in = ['Новый','Выполнено'] , types__tittle__in = ['Задача','Ошибка'])
+
+3 запрос
+
+from webapp.models import Task, Status, Type
+from django.db.models import Q
+
+Task.objects.filter(Q(summary__icontains='bug') | Q(types__tittle__iexact='Ошибка'), status__tittle='Выполнено')

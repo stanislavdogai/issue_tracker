@@ -100,3 +100,4 @@ class DeleteTask(TemplateView):
             task.delete()
             return redirect('home_page')
         return render(request, 'delete.html', {'form': form, 'task': task})
+
