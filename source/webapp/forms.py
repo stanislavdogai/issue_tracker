@@ -43,3 +43,6 @@ class TaskForm(forms.ModelForm):
         if len(self.cleaned_data.get('types')) == 3:
             raise ValidationError('Нельзя выбирать все три типа')
         return self.cleaned_data.get("types")
+
+class SearchForm(forms.Form):
+    search = forms.CharField(max_length=30, required=False, label="Найти")

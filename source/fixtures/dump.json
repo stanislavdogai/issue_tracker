@@ -662,5 +662,61 @@
       1
     ]
   }
+},
+{
+  "model": "webapp.task",
+  "pk": 10,
+  "fields": {
+    "created_at": "2022-01-27T11:50:16.907Z",
+    "updated_at": "2022-01-27T11:50:16.907Z",
+    "summary": "zzzz12312123",
+    "description": "hashshgnsjnackansjc",
+    "status": 1,
+    "types": [
+      1
+    ]
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 11,
+  "fields": {
+    "created_at": "2022-01-27T11:50:31.596Z",
+    "updated_at": "2022-01-27T11:50:31.596Z",
+    "summary": "hooooooo",
+    "description": "123sdjajjweeeeee",
+    "status": 2,
+    "types": [
+      2
+    ]
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 12,
+  "fields": {
+    "created_at": "2022-01-27T11:50:47.177Z",
+    "updated_at": "2022-01-27T11:50:47.177Z",
+    "summary": "webappppp",
+    "description": "heloooooooo",
+    "status": 3,
+    "types": [
+      3
+    ]
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 13,
+  "fields": {
+    "created_at": "2022-01-27T11:51:12.375Z",
+    "updated_at": "2022-01-27T11:51:12.375Z",
+    "summary": "много задач",
+    "description": "очеееень много",
+    "status": 1,
+    "types": [
+      2
+    ]
+  }
 }
 ]
