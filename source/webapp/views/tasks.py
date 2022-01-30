@@ -3,9 +3,9 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
 from webapp.models import Task
-from django.views.generic import TemplateView, FormView, ListView
+from django.views.generic import TemplateView, FormView, ListView, DetailView, CreateView
 from webapp.forms import TaskForm, TaskFormDelete, SearchForm
-from webapp.base import FormView as CustomFormView
+from webapp.views.base import FormView as CustomFormView
 
 
 
@@ -44,26 +44,26 @@ class HomePage(ListView):
 
 
 
-class TaskView(TemplateView):
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        task = get_object_or_404(Task, pk=kwargs.get("pk"))
-        context['task'] = task
-        return context
+class TaskView(DetailView):
+    template_name = 'tasks/view.html'
+    model = Task
 
 
 
-class CreateTask(CustomFormView):
+
+
+class CreateTask(CreateView):
+    model = Task
     form_class = TaskForm
     template_name = 'tasks/create.html'
 
-    def form_valid(self, form):
-        self.object = form.save()
-        return super().form_valid(form)
+    # def form_valid(self, form):
+    #     task = get_object_or_404(Task, pk=self.kwargs.get('pk'))
+    #     form.instance.task = task
+    #     return super().form_valid(form)
 
-    def get_redirect_url(self):
-        return redirect('view_page', pk=self.object.pk)
-
+    def get_success_url(self):
+        return reverse('view_page', kwargs={'pk':self.object.pk})
 
 
 class UpdateTask(FormView):

@@ -38,3 +38,9 @@ class Task(BaseModel):
         db_table = 'Tasks'
         verbose_name = 'Задача'
         verbose_name_plural = 'Задачи'
+
+# class Project(models.Model):
+#     date_start = models.DateField()
+#     date_end = models.DateField()
+#     title = models.CharField()
+#     description = models.TextField()
