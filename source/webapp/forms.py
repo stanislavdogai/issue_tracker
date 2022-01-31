@@ -1,13 +1,8 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from django.forms import widgets
-from webapp.models import Type, Status, Task
+from webapp.models import Task, Project
 
-# class TaskForm(forms.Form):
-#     summary = forms.CharField(max_length=200, required=True, label="Заголовок")
-#     description = forms.CharField(max_length=2002, required=False, label="Описание", widget=widgets.Textarea(attrs={"rows": 5, "cols":50}))
-#     types = forms.ModelMultipleChoiceField(queryset=Type.objects.all(), widget=forms.CheckboxSelectMultiple)
-#     status = forms.ModelChoiceField(queryset=Status.objects.all())
+
 
 class TaskFormDelete(forms.Form):
     confirm = forms.CharField(max_length=3, required=True, label='Подтверждение удаления')
@@ -33,7 +28,6 @@ class TaskForm(forms.ModelForm):
         return cleaned_data
 
     def clean_description(self):
-        # cleaned_data = super.clean()
         if 'description' in self.cleaned_data.get('description'):
             raise ValidationError('Нельзя вводить в поле description слово "description"')
         return self.cleaned_data.get('description')
@@ -46,3 +40,17 @@ class TaskForm(forms.ModelForm):
 
 class SearchForm(forms.Form):
     search = forms.CharField(max_length=30, required=False, label="Найти")
+
+class ProjectForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        exclude = []
+
+
+class ProjectTaskForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ("summary", "description", 'status', 'types')
+        widgets = {
+            'types': forms.CheckboxSelectMultiple
+        }

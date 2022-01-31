@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block tittle %}Projects{% endblock %}
+{% block nav %}
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'project_create' %}">Create Project</a>
+    </li>
+{% endblock %}
+
+{% block content %}
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
+    {% if projects %}
+    {% for project in projects %}
+        <div class="card text-white bg-secondary mb-3" style="max-width: 40rem;">
+            <div class="card-header"><a href="{% url 'project_view' project.pk %}" class="text-white">Project: {{ project.title }}</a></div>
+            <div class="card-body">
+            <p class="card-text">{{ project.description }}</p>
+{#                <a href="" class="text-white">Удалить задачу</a>#}
+{#            <a href="" class="text-white">Редактировать задачу</a>#}
+            </div>
+        </div>
+    {% endfor %}
+        {% else %}
+        <h1>No projects</h1>
+    {% endif %}
+    {% if is_paginated %}
+        {% include 'partial/pagination.html' %}
+    {% endif %}
+{% endblock %}

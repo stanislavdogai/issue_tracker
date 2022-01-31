@@ -5,8 +5,6 @@ from django.urls import reverse
 from webapp.models import Task
 from django.views.generic import TemplateView, FormView, ListView, DetailView, CreateView
 from webapp.forms import TaskForm, TaskFormDelete, SearchForm
-from webapp.views.base import FormView as CustomFormView
-
 
 
 class HomePage(ListView):
@@ -43,24 +41,15 @@ class HomePage(ListView):
             return self.form.cleaned_data.get("search")
 
 
-
 class TaskView(DetailView):
     template_name = 'tasks/view.html'
     model = Task
-
-
-
 
 
 class CreateTask(CreateView):
     model = Task
     form_class = TaskForm
     template_name = 'tasks/create.html'
-
-    # def form_valid(self, form):
-    #     task = get_object_or_404(Task, pk=self.kwargs.get('pk'))
-    #     form.instance.task = task
-    #     return super().form_valid(form)
 
     def get_success_url(self):
         return reverse('view_page', kwargs={'pk':self.object.pk})
@@ -78,7 +67,6 @@ class UpdateTask(FormView):
         context = super().get_context_data(**kwargs)
         context['task'] = self.task
         return context
-
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()

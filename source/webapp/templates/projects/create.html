@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block tittle %}Создать проект{% endblock %}
+
+{% block content %}
+<h1>Создание проекта</h1>
+    <form method="POST" class="mb-5">
+    {% include 'partial/form.html' with button_text='Создать' %}
+    </form>
+{% endblock %}
