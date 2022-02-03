@@ -1,9 +1,9 @@
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
-from django.urls import reverse
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from webapp.forms import SearchForm, ProjectForm, ProjectTaskForm
+from webapp.forms import SearchForm, ProjectForm, ProjectTaskForm, ProjectDeleteForm
 from webapp.models import Project, Task
 
 
@@ -71,6 +71,7 @@ class ProjectTaskCreate(CreateView):
         task = form.save(commit=False)
         task.project = project
         task.save()
+        form.save_m2m()
         return redirect('project_view', pk=project.pk)
 
 class UpdateProject(UpdateView):
@@ -80,3 +81,16 @@ class UpdateProject(UpdateView):
 
     def get_success_url(self):
         return reverse('project_view', kwargs={'pk' : self.object.pk})
+
+class DeleteProject(DeleteView):
+    model = Project
+    template_name = 'projects/delete.html'
+    context_key = 'project'
+    success_url = reverse_lazy('project_page')
+    form_class = ProjectDeleteForm
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        if self.request.method == "POST":
+            kwargs['instance'] = self.object
+        return kwargs

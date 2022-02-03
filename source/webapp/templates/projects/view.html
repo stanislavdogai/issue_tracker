@@ -2,9 +2,9 @@
 
 {% block title %}Project {{ project.pk }}{% endblock %}
 {% block nav %}
-<li class="nav-item">
-     <a class="nav-link" href="{% url "project_task_create" project.pk %}">Добавить задачу в проект</a>
- </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{% url "project_task_create" project.pk %}">Добавить задачу в проект</a>
+    </li>
 {% endblock %}
 {% block content %}
 
@@ -17,29 +17,27 @@
     {% endif %}
 </div>
 {% if tasks %}
-    <h2 class="text-center">Задачи данного проекта:</h2>
+<h2 class="text-center">Задачи данного проекта:</h2>
 {% for task in tasks %}
 <div class="card mt-5">
-  <div class="card-header">
-      <a href="{% url 'view_page' task.pk %}">Главное описание задачи: {{ task.summary }}</a>
-  </div>
-  <div class="card-body">
-    <blockquote class="blockquote mb-0">
-      <p>Подробное описание задачи: {{ task.description }}</p>
-    <p>Статус задачи {{ task.status }}</p>
-        <p>Тип задачи
-            {% for type in task.types.all %}
-                {{ type }}{% if not forloop.last %}, {% else %}. {% endif %}
-            {% endfor %}
-        </p>
-      <footer class="">Время создания: {{ task.created_at }}<br>Время обновления {{ task.updated_at }}</footer>
-    </blockquote>
-  <a href="{% url 'delete_page' task.pk  %} " class="btn btn-secondary mt-3">Удалить задачу</a>
-  <a href="{% url 'update_page' task.pk  %} " class="btn btn-secondary mt-3">Отредактировать задачу</a>
-  </div>
-</div>{% endfor %}
-
+    <div class="card-header">
+        <a href="{% url 'view_page' task.pk %}">Главное описание задачи: {{ task.summary }}</a>
+    </div>
+    <div class="card-body">
+        <blockquote class="blockquote mb-0">
+            <p>Подробное описание задачи: {{ task.description }}</p>
+            <p>Статус задачи {{ task.status }}</p>
+            <p>Тип задачи{% for type in task.types.all %}
+                 {{ type }}{% if not forloop.last %}, {% else %}. {% endif %}
+              {% endfor %}</p>
+            <footer class="">Время создания: {{ task.created_at }}<br>Время обновления {{ task.updated_at }}</footer>
+        </blockquote>
+    <a href="{% url 'delete_page' task.pk  %} " class="btn btn-secondary mt-3">Удалить задачу</a>
+    <a href="{% url 'update_page' task.pk  %} " class="btn btn-secondary mt-3">Отредактировать задачу</a>
+    </div>
+</div>
+{% endfor %}
     {% else %}
-    <h2 class="text-center">Задач у этого проекта нет</h2>
-{% endif %}
+        <h2 class="text-center">Задач у этого проекта нет</h2>
+    {% endif %}
 {% endblock %}

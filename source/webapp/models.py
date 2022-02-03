@@ -48,7 +48,7 @@ class Task(BaseModel):
     description = models.TextField(max_length=2002, null=True, blank=True, verbose_name="Описание")
     status = models.ForeignKey('webapp.Status', on_delete=models.PROTECT, related_name='status', verbose_name='Статус')
     types = models.ManyToManyField('webapp.Type', related_name='tasks', blank=True)
-    project = models.ForeignKey('webapp.Project', on_delete=models.PROTECT, related_name='tasks', verbose_name='Проект')
+    project = models.ForeignKey('webapp.Project', on_delete=models.CASCADE, related_name='tasks', verbose_name='Проект')
 
     def __str__(self):
         return f"{self.pk}. {self.summary}"

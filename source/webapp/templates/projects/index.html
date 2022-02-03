@@ -16,7 +16,7 @@
             <div class="card-header"><a href="{% url 'project_view' project.pk %}" class="text-white">Project: {{ project.title }}</a></div>
             <div class="card-body">
             <p class="card-text">{{ project.description }}</p>
-{#                <a href="" class="text-white">Удалить задачу</a>#}
+            <a href="{% url 'project_delete' project.pk %}" class="text-white">Удалить проект</a>
             <a href="{% url 'project_update' project.pk %}" class="text-white">Редактировать проект</a>
             </div>
         </div>

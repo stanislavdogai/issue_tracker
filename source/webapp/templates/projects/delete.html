@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+{% block title %}Удаление проекта{% endblock %}
+{% block content %}
+    <form method="POST">
+    <h2>Если вы действительно хотите удалить проект <span class="fs-2 fw-bold">{{ project.title }}</span>, введите название проекта</h2>
+    {% include 'partial/form.html' with button_text='Удалить' %}
+    </form>
+{% endblock %}

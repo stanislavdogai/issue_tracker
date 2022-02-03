@@ -3,10 +3,28 @@ from django.core.exceptions import ValidationError
 from webapp.models import Task, Project
 
 
+class ProjectDeleteForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ("title",)
 
-class TaskFormDelete(forms.Form):
-    confirm = forms.CharField(max_length=3, required=True, label='Подтверждение удаления')
+    def clean_title(self):
+        print(self.instance.title, self.cleaned_data.get("title"))
+        if self.instance.title != self.cleaned_data.get("title"):
+            print('error')
+            raise ValidationError("Название проекта не соответствует")
+        return self.cleaned_data.get("title")
 
+class TaskDeleteForm(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ("summary",)
+
+    def clean_title(self):
+        print(self.instance.title, self.cleaned_data.get("summary"))
+        if self.instance.title != self.cleaned_data.get("summary"):
+            raise ValidationError("Название задачи не соответствует")
+        return self.cleaned_data.get("summary")
 
 class TaskForm(forms.ModelForm):
     class Meta:
@@ -45,6 +63,10 @@ class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
         exclude = []
+        widgets = {
+            'date_start' : forms.SelectDateWidget ,
+            'date_end' : forms.SelectDateWidget
+        }
 
 
 class ProjectTaskForm(forms.ModelForm):

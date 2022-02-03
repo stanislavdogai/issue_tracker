@@ -631,32 +631,12 @@
 },
 {
   "model": "webapp.project",
-  "pk": 2,
+  "pk": 7,
   "fields": {
-    "date_start": "2020-01-01",
-    "date_end": null,
-    "title": "TITLE",
-    "description": "desccccc"
-  }
-},
-{
-  "model": "webapp.project",
-  "pk": 3,
-  "fields": {
-    "date_start": "2021-01-01",
-    "date_end": "2023-01-01",
-    "title": "test",
-    "description": "blabla"
-  }
-},
-{
-  "model": "webapp.project",
-  "pk": 4,
-  "fields": {
-    "date_start": "2020-01-01",
-    "date_end": null,
-    "title": "sdads",
-    "description": "123"
+    "date_start": "2024-03-02",
+    "date_end": "2027-01-02",
+    "title": "asdasdw12321",
+    "description": "xcnjnhasgvd"
   }
 },
 {
@@ -672,36 +652,6 @@
     "types": [
       2,
       3
-    ]
-  }
-},
-{
-  "model": "webapp.task",
-  "pk": 4,
-  "fields": {
-    "created_at": "2022-01-20T07:52:06.168Z",
-    "updated_at": "2022-01-20T11:38:29.045Z",
-    "summary": "adssadasdasd",
-    "description": "descriptio",
-    "status": 3,
-    "project": 1,
-    "types": [
-      2
-    ]
-  }
-},
-{
-  "model": "webapp.task",
-  "pk": 5,
-  "fields": {
-    "created_at": "2022-01-20T07:54:12.041Z",
-    "updated_at": "2022-01-20T07:54:12.041Z",
-    "summary": "adssadasdasd",
-    "description": "123131231",
-    "status": 1,
-    "project": 1,
-    "types": [
-      1
     ]
   }
 },
@@ -945,19 +895,6 @@
     "types": [
       2
     ]
-  }
-},
-{
-  "model": "webapp.task",
-  "pk": 22,
-  "fields": {
-    "created_at": "2022-01-31T10:34:27.641Z",
-    "updated_at": "2022-01-31T10:34:27.641Z",
-    "summary": "ladslasldlak",
-    "description": "1238afsjkjbdsakjd",
-    "status": 1,
-    "project": 2,
-    "types": []
   }
 }
 ]

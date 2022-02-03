@@ -1,10 +1,10 @@
 from django.db.models import Q
 from django.shortcuts import render, get_object_or_404, redirect
-from django.urls import reverse
+from django.urls import reverse, reverse_lazy
 
 from webapp.models import Task
-from django.views.generic import TemplateView, FormView, ListView, DetailView, CreateView, UpdateView
-from webapp.forms import TaskForm, TaskFormDelete, SearchForm
+from django.views.generic import TemplateView, FormView, ListView, DetailView, CreateView, UpdateView, DeleteView
+from webapp.forms import TaskForm, SearchForm, TaskDeleteForm
 
 
 class HomePage(ListView):
@@ -63,20 +63,15 @@ class UpdateTask(UpdateView):
     def get_success_url(self):
         return reverse('view_page', kwargs={'pk' : self.object.pk})
 
-class DeleteTask(TemplateView):
-    CONFIRM = 'ДА'
-    def get(self, request, *args, **kwargs):
-        task = get_object_or_404(Task, pk=kwargs.get('pk'))
-        form = TaskFormDelete()
-        return render(request, 'tasks/delete.html', {'task': task, 'form': form})
+class DeleteTask(DeleteView):
+    model = Task
+    template_name = 'tasks/delete.html'
+    context_key = 'task'
+    success_url = reverse_lazy('home_page')
+    form_class = TaskDeleteForm
 
-    def post(self, request, *args, **kwargs):
-        form = TaskFormDelete(data=request.POST)
-        task = get_object_or_404(Task, pk=kwargs.get('pk'))
-        if form.is_valid():
-            if form.cleaned_data.get('confirm') != self.CONFIRM:
-                form.errors['confirm'] = ['Вы ввели другое слово']
-                return render(request, 'tasks/delete.html', {'form': form, 'task': task})
-            task.delete()
-            return redirect('home_page')
-        return render(request, 'tasks/delete.html', {'form': form, 'task': task})
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        if self.request.method == "POST":
+            kwargs['instance'] = self.object
+        return kwargs
