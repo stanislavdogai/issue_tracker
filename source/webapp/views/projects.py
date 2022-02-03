@@ -1,7 +1,7 @@
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from webapp.forms import SearchForm, ProjectForm, ProjectTaskForm
 from webapp.models import Project, Task
@@ -72,3 +72,11 @@ class ProjectTaskCreate(CreateView):
         task.project = project
         task.save()
         return redirect('project_view', pk=project.pk)
+
+class UpdateProject(UpdateView):
+    model = Project
+    form_class = ProjectForm
+    template_name = 'projects/update.html'
+
+    def get_success_url(self):
+        return reverse('project_view', kwargs={'pk' : self.object.pk})

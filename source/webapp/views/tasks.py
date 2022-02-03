@@ -3,7 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 
 from webapp.models import Task
-from django.views.generic import TemplateView, FormView, ListView, DetailView, CreateView
+from django.views.generic import TemplateView, FormView, ListView, DetailView, CreateView, UpdateView
 from webapp.forms import TaskForm, TaskFormDelete, SearchForm
 
 
@@ -55,34 +55,13 @@ class CreateTask(CreateView):
         return reverse('view_page', kwargs={'pk':self.object.pk})
 
 
-class UpdateTask(FormView):
+class UpdateTask(UpdateView):
+    model = Task
     form_class = TaskForm
     template_name = 'tasks/update.html'
 
-    def dispatch(self, request, *args, **kwargs):
-        self.task = self.get_object()
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['task'] = self.task
-        return context
-
-    def get_form_kwargs(self):
-        kwargs = super().get_form_kwargs()
-        kwargs['instance'] = self.task
-        return kwargs
-
-    def form_valid(self, form):
-        self.task = form.save()
-        return super(UpdateTask, self).form_valid(form)
-
     def get_success_url(self):
-        return reverse('view_page', kwargs={'pk': self.task.pk})
-
-    def get_object(self):
-        return get_object_or_404(Task, pk=self.kwargs.get('pk'))
-
+        return reverse('view_page', kwargs={'pk' : self.object.pk})
 
 class DeleteTask(TemplateView):
     CONFIRM = 'ДА'

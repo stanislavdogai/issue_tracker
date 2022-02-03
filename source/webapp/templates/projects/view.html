@@ -16,6 +16,7 @@
         <p>Дедлайн данного проекта{{ project.date_end }}</p>
     {% endif %}
 </div>
+{% if tasks %}
     <h2 class="text-center">Задачи данного проекта:</h2>
 {% for task in tasks %}
 <div class="card mt-5">
@@ -36,6 +37,9 @@
   <a href="{% url 'delete_page' task.pk  %} " class="btn btn-secondary mt-3">Удалить задачу</a>
   <a href="{% url 'update_page' task.pk  %} " class="btn btn-secondary mt-3">Отредактировать задачу</a>
   </div>
-</div>
-{% endfor %}
+</div>{% endfor %}
+
+    {% else %}
+    <h2 class="text-center">Задач у этого проекта нет</h2>
+{% endif %}
 {% endblock %}
