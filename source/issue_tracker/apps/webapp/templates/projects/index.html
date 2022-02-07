@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends '../base.html' %}
 {% block tittle %}Projects{% endblock %}
 {% block nav %}
       <li class="nav-item">
@@ -8,7 +8,7 @@
 
 {% block content %}
     {% if is_paginated %}
-        {% include 'partial/pagination.html' %}
+        {% include 'partial/../partial/../partial/pagination.html' %}
     {% endif %}
     {% if projects %}
     {% for project in projects %}
@@ -25,6 +25,6 @@
         <h1>No projects</h1>
     {% endif %}
     {% if is_paginated %}
-        {% include 'partial/pagination.html' %}
+        {% include 'partial/../partial/../partial/pagination.html' %}
     {% endif %}
 {% endblock %}

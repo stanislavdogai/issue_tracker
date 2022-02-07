@@ -4,8 +4,8 @@ from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 
-from webapp.forms import SearchForm, ProjectForm, ProjectTaskForm, ProjectDeleteForm
-from webapp.models import Project, Task
+from issue_tracker.apps.webapp.forms import SearchForm, ProjectForm, ProjectTaskForm, ProjectDeleteForm
+from issue_tracker.apps.webapp.models import Project, Task
 
 
 class ProjectPage(ListView):
@@ -42,7 +42,7 @@ class ProjectPage(ListView):
             return self.form.cleaned_data.get("search")
 
 class ProjectView(DetailView):
-    template_name = 'tasks/view.html'
+    template_name = 'projects/view.html'
     model = Project
 
 
@@ -64,7 +64,7 @@ class CreateProject(LoginRequiredMixin, CreateView):
 
 class ProjectTaskCreate(LoginRequiredMixin, CreateView):
     model = Task
-    template_name = 'tasks/create.html'
+    template_name = 'projects/create.html'
     form_class = ProjectTaskForm
 
     def form_valid(self, form):

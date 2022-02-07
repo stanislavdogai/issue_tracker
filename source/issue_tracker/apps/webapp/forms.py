@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from webapp.models import Task, Project
+from issue_tracker.apps.webapp.models import Task, Project
 
 
 class ProjectDeleteForm(forms.ModelForm):

@@ -1,11 +1,10 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
-from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 
-from webapp.models import Task
-from django.views.generic import TemplateView, FormView, ListView, DetailView, CreateView, UpdateView, DeleteView
-from webapp.forms import TaskForm, SearchForm, TaskDeleteForm
+from issue_tracker.apps.webapp.models import Task
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from issue_tracker.apps.webapp.forms import TaskForm, SearchForm, TaskDeleteForm
 
 
 class HomePage(ListView):

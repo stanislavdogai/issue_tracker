@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends '../base.html' %}
 {% block tittle %}Home Page{% endblock %}
 {% block nav %}
     <li class="nav-item">
@@ -7,10 +7,10 @@
 {% endblock %}
 
 {% block content %}
-    {% include 'partial/task_search.html' %}
+    {% include 'partial/../partial/../partial/task_search.html' %}
 
     {% if is_paginated %}
-        {% include 'partial/pagination.html' %}
+        {% include 'partial/../partial/../partial/pagination.html' %}
     {% endif %}
     {% if tasks %}
     {% for task in tasks %}
@@ -28,6 +28,6 @@
         <h1>Нет задач</h1>
     {% endif %}
     {% if is_paginated %}
-        {% include 'partial/pagination.html' %}
+        {% include 'partial/../partial/../partial/pagination.html' %}
     {% endif %}
 {% endblock %}
