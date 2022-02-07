@@ -23,9 +23,16 @@
       <li class="nav-item">
         <a class="nav-link" href="{% url 'home_page' %}">Tasks</a>
     </li>
-
-         {% block nav %}
+      {% block nav %}
          {% endblock %}
+      {% if user.is_authenticated %}
+           {% block menu_links %}{% endblock %}
+           <li class="menu-right"><a href="{% url 'logout' %}" class="nav-link">Выход</a></li>
+           <li class="menu-right">Привет, {{ user.username }}!</li>
+       {% else %}
+           <li class="menu-right"><a href="{% url 'login' %}" class="nav-link">Вход</a></li>
+       {% endif %}
+
       </ul>
 
 
