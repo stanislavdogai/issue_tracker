@@ -468,7 +468,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$320000$kHy5erJO7qEgJaEKSL6pyc$qx6BitnVaiVwA6ftJI3MkL45e+bZSUyNEwu+B+UhzlY=",
-    "last_login": "2022-01-21T21:29:12.483Z",
+    "last_login": "2022-02-14T12:11:27.203Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "",
@@ -477,6 +477,132 @@
     "is_staff": true,
     "is_active": true,
     "date_joined": "2022-01-17T11:27:31.974Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "123456789",
+    "last_login": "2022-02-14T11:13:25.578Z",
+    "is_superuser": false,
+    "username": "www",
+    "first_name": "21321",
+    "last_name": "21312",
+    "email": "sss@mail.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-02-14T11:13:25.554Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 3,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$ZQQVim17QPViSjXvNqcxyy$9eFjTB6gk/enh3IRe5aLK0i3oc/2BThlvqScKCnDFSk=",
+    "last_login": "2022-02-14T11:22:07.018Z",
+    "is_superuser": false,
+    "username": "1111",
+    "first_name": "123",
+    "last_name": "123",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-02-14T11:22:06.778Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 4,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$u2jDA2UAeXVxQPd6t1L7BS$rnSXUJaLzzl9ZIOfg8i9cdJGqvUuhHG2R0lHYj46Ibw=",
+    "last_login": "2022-02-14T11:27:12.716Z",
+    "is_superuser": false,
+    "username": "admin1",
+    "first_name": "admin1",
+    "last_name": "admin",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-02-14T11:27:12.439Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 5,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$yX60Yp97L5mx6DW6bP4jML$6/eFkUkYwPoY1XXvpKnOxa7qOjCjyB5jvs/RqXU4kuk=",
+    "last_login": "2022-02-14T11:28:09.091Z",
+    "is_superuser": false,
+    "username": "wwww",
+    "first_name": "123",
+    "last_name": "123123",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-02-14T11:28:08.828Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 6,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$afAhLdPGvHKTQEb9nrxlw0$qUMZoUpnpcktDV3cTY4+CJJDYfPgIPrFT1AJXW2GLqY=",
+    "last_login": "2022-02-14T11:40:29.964Z",
+    "is_superuser": false,
+    "username": "qweewqe",
+    "first_name": "qwe",
+    "last_name": "qwe",
+    "email": "qwe@qwe.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-02-14T11:40:29.716Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 7,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$gfkgfBLGoYWRW92qzncgLc$r9MpxNSdkaLnVTi98Rw/4ACmm2pth0qJr6jMZJmIgoE=",
+    "last_login": "2022-02-14T11:42:59.633Z",
+    "is_superuser": false,
+    "username": "qwe",
+    "first_name": "qwe",
+    "last_name": "qwe",
+    "email": "qwe@qwe.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-02-14T11:42:59.383Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$320000$GBRKaTGw4m3QvtBzdh9DkB$JXpk/S1HYH143+zxMDstfeMF2KMwDPQDXoy4DMgbPFk=",
+    "last_login": "2022-02-14T12:05:30.619Z",
+    "is_superuser": false,
+    "username": "йцуцй",
+    "first_name": "2",
+    "last_name": "",
+    "email": "222@r.ru",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-02-14T12:05:30.371Z",
     "groups": [],
     "user_permissions": []
   }
@@ -559,6 +685,14 @@
   "fields": {
     "app_label": "webapp",
     "model": "project"
+  }
+},
+{
+  "model": "sessions.session",
+  "pk": "17isbiutmunarc9nywkurh4w7119dl49",
+  "fields": {
+    "session_data": ".eJxVjEEOwiAQRe_C2hAGpIBL9z0DGTqDVA0kpV0Z765NutDtf-_9l4i4rSVunZc4k7gIEKffLeH04LoDumO9NTm1ui5zkrsiD9rl2Iif18P9OyjYy7dW7K0JTrFGMhlsGPLg2AcAry0Fr9g5hQnIJGPprH1CzA4ystWgjRPvD8alN0c:1nJaCV:OYElPMfnjE3snlidDi0tu6mKEG2K4RBBuCmFaLbkVRA",
+    "expire_date": "2022-02-28T12:11:27.205Z"
   }
 },
 {
@@ -894,6 +1028,66 @@
     "project": 1,
     "types": [
       2
+    ]
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 23,
+  "fields": {
+    "created_at": "2022-02-07T14:45:08.004Z",
+    "updated_at": "2022-02-07T14:45:08.004Z",
+    "summary": "assda1231231",
+    "description": "1231312",
+    "status": 1,
+    "project": 1,
+    "types": [
+      3
+    ]
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 24,
+  "fields": {
+    "created_at": "2022-02-07T14:45:29.417Z",
+    "updated_at": "2022-02-07T14:45:29.417Z",
+    "summary": "asdadswemqmmuruqw",
+    "description": "9102u36sbfhasjbdad",
+    "status": 1,
+    "project": 7,
+    "types": [
+      2
+    ]
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 25,
+  "fields": {
+    "created_at": "2022-02-14T11:46:19.827Z",
+    "updated_at": "2022-02-14T11:46:19.827Z",
+    "summary": "aweqwewq",
+    "description": "awe",
+    "status": 1,
+    "project": 1,
+    "types": [
+      1
+    ]
+  }
+},
+{
+  "model": "webapp.task",
+  "pk": 26,
+  "fields": {
+    "created_at": "2022-02-14T11:50:50.403Z",
+    "updated_at": "2022-02-14T11:50:50.403Z",
+    "summary": "aweqwewq",
+    "description": "awe",
+    "status": 1,
+    "project": 1,
+    "types": [
+      1
     ]
   }
 }
