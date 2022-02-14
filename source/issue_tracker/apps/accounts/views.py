@@ -9,7 +9,6 @@ def register_view(request):
     form = MyUserCreateForm()
     if request.method == 'POST':
         form = MyUserCreateForm(data=request.POST)
-        # print(form)
         if form.is_valid():
             user = form.save()
             login(request, user)
