@@ -45,8 +45,6 @@ class ProjectView(DetailView):
     template_name = 'projects/view.html'
     model = Project
 
-
-
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         tasks = self.object.tasks.order_by("-created_at")
@@ -58,9 +56,8 @@ class CreateProject(LoginRequiredMixin, CreateView):
     form_class = ProjectForm
     template_name = 'projects/create.html'
 
-
     def get_success_url(self):
-        return reverse('project_view', kwargs={'pk':self.object.pk})
+        return reverse('webapp:project_view', kwargs={'pk':self.object.pk})
 
 class ProjectTaskCreate(LoginRequiredMixin, CreateView):
     model = Task
@@ -73,7 +70,7 @@ class ProjectTaskCreate(LoginRequiredMixin, CreateView):
         task.project = project
         task.save()
         form.save_m2m()
-        return redirect('project_view', pk=project.pk)
+        return redirect('webapp:project_view', pk=project.pk)
 
 class UpdateProject(LoginRequiredMixin, UpdateView):
     model = Project
@@ -81,13 +78,13 @@ class UpdateProject(LoginRequiredMixin, UpdateView):
     template_name = 'projects/update.html'
 
     def get_success_url(self):
-        return reverse('project_view', kwargs={'pk' : self.object.pk})
+        return reverse('webapp:project_view', kwargs={'pk' : self.object.pk})
 
 class DeleteProject(LoginRequiredMixin, DeleteView):
     model = Project
     template_name = 'projects/delete.html'
     context_key = 'project'
-    success_url = reverse_lazy('project_page')
+    success_url = reverse_lazy('webapp:project_page')
     form_class = ProjectDeleteForm
 
     def get_form_kwargs(self):

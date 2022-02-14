@@ -1,5 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.db.models import Q
+from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 
 from issue_tracker.apps.webapp.models import Task
@@ -58,7 +59,7 @@ class CreateTask(LoginRequiredMixin, CreateView):
     #     return super().dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
-        return reverse('view_page', kwargs={'pk':self.object.pk})
+        return reverse('webapp:view_page', kwargs={'pk':self.object.pk})
 
 
 class UpdateTask(LoginRequiredMixin, UpdateView):
@@ -67,13 +68,13 @@ class UpdateTask(LoginRequiredMixin, UpdateView):
     template_name = 'tasks/update.html'
 
     def get_success_url(self):
-        return reverse('view_page', kwargs={'pk' : self.object.pk})
+        return reverse('webapp:view_page', kwargs={'pk' : self.object.pk})
 
 class DeleteTask(LoginRequiredMixin, DeleteView):
     model = Task
     template_name = 'tasks/delete.html'
     context_key = 'task'
-    success_url = reverse_lazy('home_page')
+    success_url = reverse_lazy('webapp:home_page')
     form_class = TaskDeleteForm
 
     def get_form_kwargs(self):
@@ -81,3 +82,6 @@ class DeleteTask(LoginRequiredMixin, DeleteView):
         if self.request.method == "POST":
             kwargs['instance'] = self.object
         return kwargs
+
+def jstest(request):
+    return render(request, 'tasks/JS_test.html')

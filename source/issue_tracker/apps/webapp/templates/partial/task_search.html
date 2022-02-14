@@ -1,4 +1,4 @@
-<form class="d-flex mt-3 mb-3" action="{% url "home_page" %}" method="GET">
+<form class="d-flex mt-3 mb-3" action="{% url "webapp:home_page" %}" method="GET">
     <label for="{{ form.search.id_for_label }}">{{ form.search.label }}:</label>
     {{ form.search }}
     <input  type="submit" value="Поиск">

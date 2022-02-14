@@ -1,23 +1,27 @@
-{% extends '../base.html' %}
+{% extends 'base.html' %}
 {% block tittle %}Projects{% endblock %}
 {% block nav %}
+    {% if user.is_authenticated %}
       <li class="nav-item">
-        <a class="nav-link" href="{% url 'project_create' %}">Create Project</a>
+        <a class="nav-link" href="{% url 'webapp:project_create' %}">Create Project</a>
     </li>
+    {% endif %}
 {% endblock %}
 
 {% block content %}
     {% if is_paginated %}
-        {% include 'partial/../partial/../partial/pagination.html' %}
+        {% include 'partial/pagination.html' %}
     {% endif %}
     {% if projects %}
     {% for project in projects %}
         <div class="card text-white bg-secondary mb-3" style="max-width: 40rem;">
-            <div class="card-header"><a href="{% url 'project_view' project.pk %}" class="text-white">Project: {{ project.title }}</a></div>
+            <div class="card-header"><a href="{% url 'webapp:project_view' project.pk %}" class="text-white">Project: {{ project.title }}</a></div>
             <div class="card-body">
             <p class="card-text">{{ project.description }}</p>
-            <a href="{% url 'project_delete' project.pk %}" class="text-white">Удалить проект</a>
-            <a href="{% url 'project_update' project.pk %}" class="text-white">Редактировать проект</a>
+                {% if user.is_authenticated %}
+            <a href="{% url 'webapp:project_delete' project.pk %}" class="text-white">Удалить проект</a>
+            <a href="{% url 'webapp:project_update' project.pk %}" class="text-white">Редактировать проект</a>
+                {% endif %}
             </div>
         </div>
     {% endfor %}
@@ -25,6 +29,6 @@
         <h1>No projects</h1>
     {% endif %}
     {% if is_paginated %}
-        {% include 'partial/../partial/../partial/pagination.html' %}
+        {% include 'partial/pagination.html' %}
     {% endif %}
 {% endblock %}

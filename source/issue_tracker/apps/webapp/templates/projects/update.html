@@ -1,9 +1,9 @@
-{% extends '../base.html' %}
+{% extends 'base.html' %}
 {% block tittle %}Изменить проект{% endblock %}
 
 {% block content %}
 <h1>Изменение проекта</h1>
     <form method="POST" class="mb-5">
-    {% include 'partial/../partial/../partial/form.html' with button_text='Изменить' %}
+    {% include 'partial/form.html' with button_text='Изменить' %}
     </form>
 {% endblock %}
