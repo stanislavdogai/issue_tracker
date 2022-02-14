@@ -12,8 +12,12 @@ class MyUserCreateForm(forms.ModelForm):
         cleaned_data = super().clean()
         password = cleaned_data.get("password")
         password_confirm = cleaned_data.get("password_confirm")
+        first_name = cleaned_data.get('first_name')
+        last_name = cleaned_data.get('last_name')
         if password != password_confirm:
             raise ValidationError("Пароли не совпадают")
+        if not first_name and not last_name:
+            raise ValidationError('Введите хотя бы имя или фамилию')
         return cleaned_data
 
 
