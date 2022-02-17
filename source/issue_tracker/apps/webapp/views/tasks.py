@@ -1,6 +1,6 @@
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 from django.db.models import Q
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 
 from issue_tracker.apps.webapp.models import Task
@@ -69,6 +69,11 @@ class UpdateTask(PermissionRequiredMixin, UpdateView):
     form_class = TaskForm
     template_name = 'tasks/update.html'
     permission_required = 'webapp.change_task'
+
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
 
     def get_success_url(self):
         return reverse('webapp:view_page', kwargs={'pk' : self.object.pk})

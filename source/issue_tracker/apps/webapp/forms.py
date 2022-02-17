@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
 from issue_tracker.apps.webapp.models import Task, Project
 
@@ -25,6 +26,8 @@ class TaskDeleteForm(forms.ModelForm):
         if self.instance.summary != self.cleaned_data.get("summary"):
             raise ValidationError("Название задачи не соответствует")
         return self.cleaned_data.get("summary")
+
+
 
 class TaskForm(forms.ModelForm):
     def __init__(self,request, *args, **kwargs):
@@ -83,6 +86,10 @@ class ProjectTaskForm(forms.ModelForm):
         }
 
 class ProjectUserAddForm(forms.ModelForm):
+    def __init__(self,request, *args, **kwargs):
+        super(ProjectUserAddForm, self).__init__(*args, **kwargs)
+        self.fields['users'].queryset = User.objects.exclude(username=request.user)
+
     class Meta:
         model = Project
         fields = ('users',)

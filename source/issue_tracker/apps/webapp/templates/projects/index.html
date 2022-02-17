@@ -2,33 +2,38 @@
 {% block tittle %}Projects{% endblock %}
 {% block nav %}
     {% if perms.webapp.add_project %}
-      <li class="nav-item">
-        <a class="nav-link" href="{% url 'webapp:project_create' %}">Create Project</a>
-    </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{% url 'webapp:project_create' %}">Create Project</a>
+        </li>
     {% endif %}
 {% endblock %}
 
 {% block content %}
+    {% if user.is_authenticated %}
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
     {% endif %}
     {% if projects %}
     {% for project in projects %}
         <div class="card text-white bg-secondary mb-3" style="max-width: 40rem;">
-            <div class="card-header"><a href="{% url 'webapp:project_view' project.pk %}" class="text-white">Project: {{ project.title }}</a></div>
+            <div class="card-header">
+                <a href="{% url 'webapp:project_view' project.pk %}" class="text-white">Project: {{ project.title }}</a>
+            </div>
             <div class="card-body">
-            <p class="card-text">{{ project.description }}</p>
-                {% if user.is_authenticated %}
-            {% if perms.webapp.delete_project and user in project.users.all %}<a href="{% url 'webapp:project_delete' project.pk %}" class="text-white">Удалить проект</a>{% endif %}
-            {% if perms.webapp.change_project and user in project.users.all%}<a href="{% url 'webapp:project_update' project.pk %}" class="text-white">Редактировать проект</a>{% endif %}
-                {% endif %}
+                <p class="card-text">{{ project.description }}</p>
+                {% if perms.webapp.delete_project and user in project.users.all %}<a href="{% url 'webapp:project_delete' project.pk %}" class="text-white">Удалить проект</a>{% endif %}
+                {% if perms.webapp.change_project and user in project.users.all%}<a href="{% url 'webapp:project_update' project.pk %}" class="text-white">Редактировать проект</a>{% endif %}
+
             </div>
         </div>
     {% endfor %}
         {% else %}
-        <h1>No projects</h1>
+            <h1>No projects</h1>
     {% endif %}
     {% if is_paginated %}
         {% include 'partial/pagination.html' %}
+    {% endif %}
+        {% else %}
+        <h1>Авторизуйтесь</h1>
     {% endif %}
 {% endblock %}
