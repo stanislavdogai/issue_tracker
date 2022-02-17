@@ -20,7 +20,6 @@ class MyUserCreateForm(forms.ModelForm):
             raise ValidationError('Введите хотя бы имя или фамилию')
         return cleaned_data
 
-
     def save(self, commit=True):
         user = super().save(commit=False)
         user.set_password(self.cleaned_data.get("password"))

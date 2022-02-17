@@ -1,6 +1,6 @@
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.db.models import Q
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.urls import reverse, reverse_lazy
 
 from issue_tracker.apps.webapp.models import Task
@@ -47,41 +47,51 @@ class TaskView(DetailView):
     model = Task
 
 
-class CreateTask(LoginRequiredMixin, CreateView):
+class CreateTask(PermissionRequiredMixin, CreateView):
     model = Task
     form_class = TaskForm
     template_name = 'tasks/create.html'
-
-    # def dispatch(self, request, *args, **kwargs):
-    #     if not request.user.is_authenticated:
-    #         print('NO')
-    #         return redirect('login')
-    #     return super().dispatch(request, *args, **kwargs)
+    permission_required = 'webapp.add_task'
 
     def get_success_url(self):
         return reverse('webapp:view_page', kwargs={'pk':self.object.pk})
 
+    def get_form_kwargs(self):
+        kwargs = super().get_form_kwargs()
+        kwargs['request'] = self.request
+        return kwargs
 
-class UpdateTask(LoginRequiredMixin, UpdateView):
+
+
+
+class UpdateTask(PermissionRequiredMixin, UpdateView):
     model = Task
     form_class = TaskForm
     template_name = 'tasks/update.html'
+    permission_required = 'webapp.change_task'
 
     def get_success_url(self):
         return reverse('webapp:view_page', kwargs={'pk' : self.object.pk})
 
-class DeleteTask(LoginRequiredMixin, DeleteView):
+    def has_permission(self):
+        return super().has_permission() and self.request.user in self.get_object().project.users.all()
+
+class DeleteTask(PermissionRequiredMixin, DeleteView):
     model = Task
     template_name = 'tasks/delete.html'
     context_key = 'task'
     success_url = reverse_lazy('webapp:home_page')
     form_class = TaskDeleteForm
+    permission_required = 'webapp.delete_task'
 
     def get_form_kwargs(self):
         kwargs = super().get_form_kwargs()
         if self.request.method == "POST":
             kwargs['instance'] = self.object
         return kwargs
+
+    def has_permission(self):
+        return super().has_permission() and self.request.user in self.get_object().project.users.all()
 
 def jstest(request):
     return render(request, 'tasks/JS_test.html')

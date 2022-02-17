@@ -2,7 +2,7 @@
 
 {% block title %}Project {{ project.pk }}{% endblock %}
 {% block nav %}
-    {% if user.is_authenticated %}
+    {% if perms.webapp.add_task and user in project.users.all%}
     <li class="nav-item">
         <a class="nav-link" href="{% url "webapp:project_task_create" project.pk %}">Добавить задачу в проект</a>
     </li>
@@ -17,9 +17,35 @@
     {% if project.date_end %}
         <p>Дедлайн данного проекта{{ project.date_end }}</p>
     {% endif %}
+
+    <p>Над проектом работают: {% for name in users %}{{ name.username }}, {% endfor %}</p>
+    {% if perms.webapp.change_project and user in project.users.all %}
+
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+      Редактировать пользователей
+    </button>
+    <!-- Modal -->
+    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="staticBackdropLabel">Добавьте или удалите пользователей</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+            <div class="modal-body">
+                <form method="post">
+                    {% include 'partial/form.html'  with button_text='Применить'%}
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+</div>
 </div>
 {% if tasks %}
 <h2 class="text-center">Задачи данного проекта:</h2>
+    <div class="container">
 {% for task in tasks %}
 <div class="card mt-5">
     <div class="card-header">
@@ -34,14 +60,13 @@
               {% endfor %}</p>
             <footer class="">Время создания: {{ task.created_at }}<br>Время обновления {{ task.updated_at }}</footer>
         </blockquote>
-    {% if user.is_authenticated %}
-    <a href="{% url 'webapp:delete_page' task.pk  %} " class="btn btn-secondary mt-3">Удалить задачу</a>
-    <a href="{% url 'webapp:update_page' task.pk  %} " class="btn btn-secondary mt-3">Отредактировать задачу</a>
-    {% endif %}
+    {% if perms.webapp.delete_task and user in project.users.all%}<a href="{% url 'webapp:delete_page' task.pk  %} " class="btn btn-secondary mt-3">Удалить задачу</a>{% endif %}
+    {% if perms.webapp.change_task and user in project.users.all%}<a href="{% url 'webapp:update_page' task.pk  %} " class="btn btn-secondary mt-3">Отредактировать задачу</a>{% endif %}
     </div>
 </div>
 {% endfor %}
     {% else %}
         <h2 class="text-center">Задач у этого проекта нет</h2>
     {% endif %}
+    </div>
 {% endblock %}

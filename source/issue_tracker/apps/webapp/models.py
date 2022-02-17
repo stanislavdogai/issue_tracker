@@ -1,5 +1,6 @@
 from functools import partial
 
+from django.contrib.auth.models import User
 from django.db import models
 
 class BaseModel(models.Model):
@@ -34,6 +35,7 @@ class Project(models.Model):
     date_end = models.DateField(null=True, blank=True)
     title = models.CharField(max_length=200, null=False, blank=False, verbose_name='Название')
     description = models.TextField(max_length=500, null=False, blank=False, verbose_name='Описание')
+    users = models.ManyToManyField(User, related_name='projects', null=False, blank=True, verbose_name='Пользователь')
 
     def __str__(self):
         return f'{self.title}'

@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block tittle %}Projects{% endblock %}
 {% block nav %}
-    {% if user.is_authenticated %}
+    {% if perms.webapp.add_project %}
       <li class="nav-item">
         <a class="nav-link" href="{% url 'webapp:project_create' %}">Create Project</a>
     </li>
@@ -19,8 +19,8 @@
             <div class="card-body">
             <p class="card-text">{{ project.description }}</p>
                 {% if user.is_authenticated %}
-            <a href="{% url 'webapp:project_delete' project.pk %}" class="text-white">Удалить проект</a>
-            <a href="{% url 'webapp:project_update' project.pk %}" class="text-white">Редактировать проект</a>
+            {% if perms.webapp.delete_project and user in project.users.all %}<a href="{% url 'webapp:project_delete' project.pk %}" class="text-white">Удалить проект</a>{% endif %}
+            {% if perms.webapp.change_project and user in project.users.all%}<a href="{% url 'webapp:project_update' project.pk %}" class="text-white">Редактировать проект</a>{% endif %}
                 {% endif %}
             </div>
         </div>

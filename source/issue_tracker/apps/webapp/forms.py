@@ -20,13 +20,18 @@ class TaskDeleteForm(forms.ModelForm):
         model = Task
         fields = ("summary",)
 
-    def clean_title(self):
-        print(self.instance.title, self.cleaned_data.get("summary"))
-        if self.instance.title != self.cleaned_data.get("summary"):
+    def clean_summary(self):
+        print(self.instance.summary, self.cleaned_data.get("summary"))
+        if self.instance.summary != self.cleaned_data.get("summary"):
             raise ValidationError("Название задачи не соответствует")
         return self.cleaned_data.get("summary")
 
 class TaskForm(forms.ModelForm):
+    def __init__(self,request, *args, **kwargs):
+        super(TaskForm, self).__init__(*args, **kwargs)
+        print(Project.objects.filter(users=request.user))
+        self.fields['project'].queryset = Project.objects.filter(users=request.user)
+
     class Meta:
         model = Task
         exclude = []
@@ -62,7 +67,7 @@ class SearchForm(forms.Form):
 class ProjectForm(forms.ModelForm):
     class Meta:
         model = Project
-        exclude = []
+        exclude = ['users']
         widgets = {
             'date_start' : forms.SelectDateWidget ,
             'date_end' : forms.SelectDateWidget
@@ -75,4 +80,12 @@ class ProjectTaskForm(forms.ModelForm):
         fields = ("summary", "description", 'status', 'types')
         widgets = {
             'types': forms.CheckboxSelectMultiple
+        }
+
+class ProjectUserAddForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ('users',)
+        widgets = {
+            'users' : forms.CheckboxSelectMultiple
         }
