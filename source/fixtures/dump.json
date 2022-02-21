@@ -138,7 +138,7 @@
     "title": "лорывлофрл",
     "description": "123фираыфыа",
     "users": [
-      1,
+      9,
       11,
       13
     ]
@@ -154,6 +154,19 @@
     "description": "1312312312321",
     "users": [
       9,
+      13
+    ]
+  }
+},
+{
+  "model": "webapp.project",
+  "pk": 21,
+  "fields": {
+    "date_start": "2022-01-01",
+    "date_end": null,
+    "title": "asjdsahdjhkjhjkasd",
+    "description": "12313123331",
+    "users": [
       13
     ]
   }
