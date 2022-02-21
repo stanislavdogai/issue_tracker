@@ -9,10 +9,10 @@
       {% if user_obj.profile.about %}
     <p class="card-text">{{ user_obj.profile.about }}</p>
       {% endif %}
-    <p class="card-text"><a href="{{ user_obj.profile.github }}">{{ user_obj.profile.github }}</a><small class="text-muted"></small></p>
+    <p class="card-text"><a href="#">{{ user_obj.profile.github }}</a><small class="text-muted"></small></p>
   </div>
 </div>
-    <h2>Проекты на которыми работает {{ user_obj.username }}</h2>
+    <h2>Проекты над которыми работает {{ user_obj.username }}</h2>
     <div class="mt-5 mb-5">
     {% include 'partial/project_list.html' %}
     </div>

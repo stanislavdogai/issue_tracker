@@ -2,7 +2,7 @@ from django.contrib.auth import login, get_user_model
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
-from django.views.generic import DetailView
+from django.views.generic import DetailView, ListView
 
 from django.conf import settings
 
@@ -43,3 +43,8 @@ class ProfileDetailView(LoginRequiredMixin ,DetailView):
         kwargs['projects'] = page.object_list
         kwargs['is_paginated'] = page.has_other_pages()
         return super(ProfileDetailView, self).get_context_data(**kwargs)
+
+class ProfilesView(ListView):
+    model = get_user_model()
+    template_name = 'profiles.html'
+    context_object_name = 'user_obj'

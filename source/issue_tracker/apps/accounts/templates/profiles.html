@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h1>Профили на этом сайте</h1>
+
+    {% for usr in user_obj %}
+        <div class="card border-dark mb-3" style="max-width: 18rem;">
+  <div class="card-header"><p><a href="{% url 'accounts:profile' usr.id %}">{{ usr.username }}</a></p></div>
+  <div class="card-body text-dark">
+    {% if usr.profile.github %}
+    <h5 class="card-title"><a href="#">{{ usr.profile.github }}</a></h5>
+    {% endif %}
+      {% if usr.profile.about %}
+    <p class="card-text">{{ usr.profile.about }}</p>
+      {% endif %}
+  </div>
+</div>
+
+    {% endfor %}
+
+{% endblock content %}

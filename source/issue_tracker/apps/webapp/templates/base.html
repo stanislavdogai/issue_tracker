@@ -23,6 +23,11 @@
       <li class="nav-item">
         <a class="nav-link" href="{% url 'webapp:home_page' %}">Tasks</a>
     </li>
+      {% if perms.accounts.view_profile %}
+          <li class="menu-right">
+              <a href="{% url 'accounts:profiles' %}" class="nav-link">Аккаунты</a>
+          </li>
+        {% endif %}
       {% block nav %}
          {% endblock %}
       {% if user.is_authenticated %}
