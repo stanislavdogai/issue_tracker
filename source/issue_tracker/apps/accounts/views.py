@@ -1,5 +1,5 @@
 from django.contrib.auth import login, get_user_model
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView, ListView
@@ -44,7 +44,9 @@ class ProfileDetailView(LoginRequiredMixin ,DetailView):
         kwargs['is_paginated'] = page.has_other_pages()
         return super(ProfileDetailView, self).get_context_data(**kwargs)
 
-class ProfilesView(ListView):
+class ProfilesView(PermissionRequiredMixin, ListView):
     model = get_user_model()
     template_name = 'profiles.html'
     context_object_name = 'user_obj'
+    permission_required = 'accounts.view_profile'
+
