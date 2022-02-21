@@ -19,8 +19,11 @@
     {% if project.date_end %}
     <p>Дедлайн данного проекта{{ project.date_end }}</p>
     {% endif %}
-
+    {% if perms.accounts.view_profile %}
+    <p>Над проектом работают: {% for name in users %} <a href="{% url 'accounts:profile' name.id %}">{{ name.username }}</a> , {% endfor %}</p>
+    {% else %}
     <p>Над проектом работают: {% for name in users %}{{ name.username }}, {% endfor %}</p>
+    {% endif %}
     {% if perms.webapp.change_project and user in project.users.all %}
 
     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#staticBackdrop">

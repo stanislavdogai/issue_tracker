@@ -128,8 +128,8 @@ STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
-# MEDIA_ROOT = BASE_DIR.joinpath('uploads')
-# MEDIA_URL = 'media/'
+MEDIA_ROOT = BASE_DIR.joinpath('uploads')
+MEDIA_URL = '/uploads/'
 
 LOGIN_REDIRECT_URL = 'webapp:home_page'
 LOGOUT_REDIRECT_URL = 'webapp:home_page'

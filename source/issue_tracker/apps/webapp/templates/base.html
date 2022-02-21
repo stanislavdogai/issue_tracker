@@ -28,7 +28,7 @@
       {% if user.is_authenticated %}
            {% block menu_links %}{% endblock %}
            <li class="menu-right"><a href="{% url 'accounts:logout' %}?next={{ request_get_full_path }}" class="nav-link">Выход</a></li>
-           <li class="menu-right">Привет, {{ user.username }}!</li>
+           <li class="menu-right">Привет, <a href="{% url 'accounts:profile' user.id %}">{{ user.username }}!</a></li>
        {% else %}
            <li class="menu-right"><a href="{% url 'accounts:login' %}?next={{ request_get_full_path }}" class="nav-link">Вход</a></li>
           <li class="menu-right"><a href="{% url 'accounts:registration' %}?next={{ request_get_full_path }}" class="nav-link">Регистрация</a></li>

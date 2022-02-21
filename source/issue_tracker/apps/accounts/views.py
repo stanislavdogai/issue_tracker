@@ -4,6 +4,8 @@ from django.core.paginator import Paginator
 from django.shortcuts import render, redirect
 from django.views.generic import DetailView
 
+from django.conf import settings
+
 from issue_tracker.apps.accounts.forms import MyUserCreateForm
 
 
@@ -21,11 +23,11 @@ def register_view(request):
     return render(request, 'registration/registration.html', {'form' : form})
 
 
-class UserDetailView(LoginRequiredMixin ,DetailView):
+class ProfileDetailView(LoginRequiredMixin ,DetailView):
     model = get_user_model()
     template_name = 'profile.html'
     context_object_name = 'user_obj'
-    paginated_by = 5
+    paginated_by = 3
     paginate_related_orphans = 0
 
     def get_context_data(self, **kwargs):
@@ -34,9 +36,10 @@ class UserDetailView(LoginRequiredMixin ,DetailView):
             self.paginated_by,
             self.paginate_related_orphans
         )
+        print(settings.BASE_DIR)
         page_number = self.request.GET.get('page', '1')
         page = paginator.get_page(page_number)
         kwargs['page_obj'] = page
         kwargs['projects'] = page.object_list
         kwargs['is_paginated'] = page.has_other_pages()
-        return super(UserDetailView, self).get_context_data(**kwargs)
+        return super(ProfileDetailView, self).get_context_data(**kwargs)
