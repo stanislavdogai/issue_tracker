@@ -2,14 +2,17 @@
 
 {% block content %}
     <div class="card mb-3">
+    {{ user_obj.profile.avatar.url }}
   <img src="{{ user_obj.profile.avatar.url }}" class="card-img-top" alt="UserAva">
   <div class="card-body">
     <h5 class="card-title">{{ user_obj.username }}</h5>
+      {% if user_obj.profile.about %}
     <p class="card-text">{{ user_obj.profile.about }}</p>
+      {% endif %}
     <p class="card-text"><a href="{{ user_obj.profile.github }}">{{ user_obj.profile.github }}</a><small class="text-muted"></small></p>
   </div>
 </div>
-    <h2>Проекты на которыми я работаю</h2>
+    <h2>Проекты на которыми работает {{ user_obj.username }}</h2>
     <div class="mt-5 mb-5">
     {% include 'partial/project_list.html' %}
     </div>
