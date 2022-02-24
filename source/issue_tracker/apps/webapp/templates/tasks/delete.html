@@ -2,7 +2,7 @@
 {% block title %}Удаление задачи{% endblock %}
 {% block content %}
     <form method="POST">
-    <h2>Если вы действительно хотите удалить задачу <span class="fs-2 fw-bold">{{ task.summary }}</span>, введите в поле заголовок задачи</h2>
-    {% include 'partial/../partial/../partial/form.html' with button_text='Удалить' %}
+        <h2>Если вы действительно хотите удалить задачу <span class="fs-2 fw-bold">{{ task.summary }}</span>, введите в поле заголовок задачи</h2>
+        {% include 'partial/../partial/../partial/form.html' with button_text='Удалить' %}
     </form>
 {% endblock %}

@@ -44,6 +44,9 @@ class Project(models.Model):
         db_table = 'projects'
         verbose_name = 'проект'
         verbose_name_plural = 'проекты'
+        permissions = [
+            ('can_update_member_list' , 'Can update member list')
+        ]
 
 class Task(BaseModel):
     summary = models.CharField(max_length=200, null=False, blank=False, verbose_name="Заголовок")
