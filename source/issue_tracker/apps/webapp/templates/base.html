@@ -36,7 +36,10 @@
                         <a href="{% url 'accounts:profile' user.id %}" class="nav-link">{{ user.username }}!</a>
                     </li>
                     <li class="nav-item">
-                        <a href="{% url 'accounts:change' user.id %}" class="nav-link">Редактировать профиль</a>
+                        <a href="{% url 'accounts:change'%}" class="nav-link">Редактировать профиль</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{% url 'accounts:change_password' %}" class="nav-link">Изменить пароль</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
